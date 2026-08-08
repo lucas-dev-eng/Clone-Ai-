@@ -1,0 +1,6 @@
+{
+  "name": "CloneAI Chat",
+  "description": "An interactive terminal-inspired AI chat application featuring real-time web search grounding and voice synthesis.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0B1020;
+  --color-bg-secondary: #111827;
+  --color-card: #182235;
+  --color-border-line: #243248;
+  --color-teal: #58C7B3;
+  --color-sand: #D8B07A;
+  --color-highlight: #6D8CFF;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-error: #EF4444;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  
+  --font-sans: "SF Pro Display", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@keyframes terminal-blink {
+  0%, 100% {
+    opacity: 0.3;
+    transform: skewX(-15deg) scaleY(1) translateX(0);
+    box-shadow: 0 0 4px rgba(88, 199, 179, 0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: skewX(-15deg) scaleY(1.05) translateX(2px);
+    box-shadow: 0 0 12px var(--color-teal), 0 0 4px var(--color-teal);
+  }
+}
+
+#cursor-blink, .animate-terminal-blink {
+  background-color: var(--color-teal) !important;
+  will-change: transform, box-shadow;
+  animation: terminal-blink 0.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
