@@ -34,6 +34,26 @@ O CloneAI começou como um chatbot com acesso a múltiplos modelos de IA (GPT, C
 - Delegar tarefas para sub-agentes especializados (orquestração multi-agente)
 - Registrar e avaliar sistematicamente a própria qualidade (loop de feedback)
 
+## Status: o que é real e o que é demo/mock
+
+Documentar isso explicitamente é uma prática deliberada, não uma fraqueza do projeto — um painel funcional que mostra dado real vale mais para avaliação técnica do que uma interface completa que finge ter dado por trás. Abaixo, o status honesto de cada peça:
+
+| Funcionalidade | Status | Observação |
+|---|---|---|
+| Chat multi-provedor (Claude/GPT/Gemini) | 🟢 Real | Roteado via Cloud Function, chaves protegidas no backend |
+| Circuit breaker por provedor | 🟢 Real | Estado lido/escrito no Firestore a cada chamada |
+| Telemetria (requisições, custo, latência) | 🟢 Real | Gravada pela Cloud Function, não pelo cliente — não pode ser falsificada pelo navegador |
+| Feed de CVEs (NVD API) | 🟢 Real | Atualizado a cada 6h via function agendada |
+| Exploit conhecido (CISA KEV) | 🟢 Real | Cruza CVEs com o catálogo oficial de vulnerabilidades exploradas ativamente |
+| Notícias de segurança (RSS) | 🟢 Real | The Hacker News, BleepingComputer, Krebs on Security |
+| RAG (busca vetorial) | 🟡 Implementado, sem dado ainda | Estrutura pronta (Firestore vector search); base ainda não populada com documentos reais |
+| Memória de longo prazo | 🟡 Implementado, sem dado ainda | Painel funcional; ainda sem fatos reais salvos em uso contínuo |
+| Fine-tuning (LoRA) | 🟡 Estrutura pronta, não executado | Depende de volume de dados de correção — só compensa com uso real acumulado |
+| **"Simulador de Agente Robot" / Rastreador de Robôs SEO** | 🔴 **Demo/Mock** | O terminal de "tráfego de robôs" e o disparo de "varredura" são simulados para fins de demonstração de conceito de indexação por IA (GEO/AEO) — **não representa tráfego real de crawlers** |
+| Scanners de segurança (Semgrep/Trivy) | 🟡 Módulo pronto, não integrado à UI | Implementado como função Python separada; falta plugar na interface |
+
+Legenda: 🟢 real e em produção · 🟡 implementado mas sem dado real ainda / não integrado · 🔴 mock, existe só para demonstrar o conceito.
+
 ## Arquitetura
 
 ```mermaid
@@ -142,16 +162,18 @@ Pontos verificados/a verificar continuamente:
 ## Roadmap
 
 - [x] Tool calling básico
-- [x] Loop de agente multi-provedor com fallback
-- [x] RAG
-- [x] Memória de longo prazo
-- [x] Scanners de segurança reais (Semgrep, Trivy)
+- [x] Loop de agente multi-provedor com fallback — **real**, com telemetria gravada em produção
+- [x] Feed de CVEs real (NVD API + CISA KEV) e notícias de segurança (RSS)
+- [ ] RAG — estrutura implementada, pendente de popular com documentos reais
+- [ ] Memória de longo prazo — estrutura implementada, pendente de uso contínuo real
+- [ ] Scanners de segurança reais (Semgrep, Trivy) — módulo pronto, falta integrar na UI
 - [x] Loop de avaliação e feedback
-- [x] Fine-tuning leve (LoRA) — estrutura pronta, pendente de volume de dados
+- [ ] Fine-tuning leve (LoRA) — estrutura pronta, pendente de volume real de dados de correção
 - [x] Orquestração multi-agente
 - [ ] Interface de feedback (👍/👎) integrada na UI
 - [ ] Execução paralela de conversas (requer isolar estado por sessão)
+- [ ] Substituir "Simulador de Agente Robot" por indexação real, ou remover/rotular como protótipo conceitual
 
 ## Licença
 
-_Defina aqui a licença do projeto (ex: MIT, Apache 2.0)._
+_Defina aqui a licença do projeto (MIT)
