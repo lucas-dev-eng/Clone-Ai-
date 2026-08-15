@@ -176,4 +176,5 @@ Pontos verificados/a verificar continuamente:
 
 ## Licença
 
-Defina aqui a licença do projeto (License MIT)
+Este projeto está licenciado sob a licença MIT — veja o arquivo
+[LICENSE](LICENSE) para mais detalhes.
