@@ -176,4 +176,4 @@ Pontos verificados/a verificar continuamente:
 
 ## Licença
 
-_Defina aqui a licença do projeto (MIT)
+Defina aqui a licença do projeto (License MIT)
